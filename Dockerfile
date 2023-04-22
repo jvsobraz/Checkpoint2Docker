@@ -1,7 +1,9 @@
 FROM python
 
 RUN apt-get -y update
+
 RUN apt-get -y install python
+
 RUN touch projeto-dimdim-dockercompose
 
 WORKDIR /app
