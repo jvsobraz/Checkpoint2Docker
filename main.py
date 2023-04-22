@@ -25,10 +25,10 @@ connection = mysql.connector.connect(
     database=DB_NAME
 )
 
-# Cria a tabela 'out_stock' no banco de dados, caso ainda não exista
+# Cria a tabela 'Checkpoint2DockerCompose' no banco de dados, caso ainda não exista
 with connection.cursor() as cursor:
     cursor.execute("""
-        CREATE TABLE IF NOT EXISTS out_stock (
+        CREATE TABLE IF NOT EXISTS Checkpoint2DockerCompose (
             id INT NOT NULL AUTO_INCREMENT,
             codigo VARCHAR(255) NOT NULL,
             descricao VARCHAR(255) NOT NULL,
@@ -43,34 +43,34 @@ with connection.cursor() as cursor:
 def index():
     return "API is running!"
 
-# Seleciona todos os registros da tabela 'out_stock'
-# No Browser acesse: http://127.0.0.1:5000/out_stock
+# Seleciona todos os registros da tabela 'Checkpoint2DockerCompose'
+# No Browser acesse: http://127.0.0.1:5000/Checkpoint2DockerCompose
 # para ver os produtos no navegador
-@app.route("/out_stock", methods=["GET"])
-def get_out_stock():
+@app.route("/Checkpoint2DockerCompose", methods=["GET"])
+def get_Checkpoint2DockerCompose():
     try:
         with connection.cursor() as cursor:
-            cursor.execute('SELECT * FROM out_stock')
+            cursor.execute('SELECT * FROM Checkpoint2DockerCompose')
             records = cursor.fetchall()
             data = [{'id': record[0], 'code': record[1], 'description': record[2], 'date': record[3].strftime('%Y-%m-%d')} for record in records]
             return jsonify(data)
     except Error as e:
         print(e)
-        return jsonify({'message': 'Erro ao buscar registros da tabela out_stock.'}), 500
+        return jsonify({'message': 'Erro ao buscar registros da tabela Checkpoint2DockerCompose.'}), 500
 
 # Insere registros no Banco (API)
-@app.route("/out_stock", methods=["POST"])
-def create_out_stock():
+@app.route("/Checkpoint2DockerCompose", methods=["POST"])
+def create_Checkpoint2DockerCompose():
     # Obtém os dados enviados na requisição
     data = request.get_json()
     codigo = data["codigo"]
     descricao = data["descricao"]
     data_solicitacao = data["data_solicitacao"]
 
-    # Insere os dados na tabela 'out_stock'
+    # Insere os dados na tabela 'Checkpoint2DockerCompose'
     with connection.cursor() as cursor:
         cursor.execute("""
-            INSERT INTO out_stock (codigo, descricao, data_solicitacao)
+            INSERT INTO Checkpoint2DockerCompose (codigo, descricao, data_solicitacao)
             VALUES (%s, %s, %s)
         """, (codigo, descricao, data_solicitacao))
         connection.commit()
@@ -79,18 +79,18 @@ def create_out_stock():
     return {"message": "Registro inserido com sucesso!"}
 
 # Atualiza registros no Banco (API)
-@app.route("/out_stock/<int:id>", methods=["PUT"])
-def update_out_stock(id):
+@app.route("/Checkpoint2DockerCompose/<int:id>", methods=["PUT"])
+def update_Checkpoint2DockerCompose(id):
     # Obtém os dados enviados na requisição
     data = request.get_json()
     codigo = data["codigo"]
     descricao = data["descricao"]
     data_solicitacao = data["data_solicitacao"]
 
-    # Atualiza os dados do registro com o ID especificado na tabela 'out_stock'
+    # Atualiza os dados do registro com o ID especificado na tabela 'Checkpoint2DockerCompose'
     with connection.cursor() as cursor:
         cursor.execute("""
-            UPDATE out_stock
+            UPDATE Checkpoint2DockerCompose
             SET codigo=%s, descricao=%s, data_solicitacao=%s
             WHERE id=%s
         """, (codigo, descricao, data_solicitacao, id))
@@ -100,12 +100,12 @@ def update_out_stock(id):
     return {"message": "Registro atualizado com sucesso!"}
 
 # Deleta registros no Banco (API)
-@app.route("/out_stock/<int:id>", methods=["DELETE"])
-def delete_out_stock(id):
-    # Deleta o registro com o ID especificado na tabela 'out_stock'
+@app.route("/Checkpoint2DockerCompose/<int:id>", methods=["DELETE"])
+def delete_Checkpoint2DockerCompose(id):
+    # Deleta o registro com o ID especificado na tabela 'Checkpoint2DockerCompose'
     with connection.cursor() as cursor:
         cursor.execute("""
-            DELETE FROM out_stock
+            DELETE FROM Checkpoint2DockerCompose
             WHERE id=%s
         """, (id,))
         connection.commit()
