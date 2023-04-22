@@ -1,4 +1,8 @@
-FROM python:3.9
+FROM python
+
+RUN apt-get -y update
+RUN apt-get -y install python3
+RUN touch projeto-dimdim-dockercompose
 
 WORKDIR /app
 
