@@ -21,12 +21,12 @@ A arquitetura do projeto Dimdim será composta por dois microserviços: um servi
  
 
 3 - Serviços e recursos no Docker Compose:
-O Docker Compose será utilizado para orquestrar os containers Docker do projeto Dimdim. Serão definidos dois serviços no Docker Compose: um serviço para a API e outro serviço para o banco de dados. O serviço da API será baseado em uma imagem Docker de uma linguagem de programação/framework específico para o desenvolvimento da API, como Node.js/Express, Flask ou Django. O serviço do banco de dados será baseado em uma imagem Docker de um banco de dados adequado para a aplicação, como MySQL, PostgreSQL ou MongoDB. Será utilizado um volume Docker para persistência dos dados do banco de dados, garantindo que os dados sejam mantidos mesmo que o container seja reiniciado.
+O Docker Compose será utilizado para orquestrar os containers Docker do projeto Dimdim. Serão definidos dois serviços no Docker Compose: um serviço para a API e outro serviço para o banco de dados. O serviço da API será baseado em uma imagem Docker de uma linguagem de programação/framework específico para o desenvolvimento da API, como Node.js, Flask ou Django. O serviço do banco de dados será baseado em uma imagem Docker de um banco de dados adequado para a aplicação, como MySQL, PostgreSQL ou MongoDB. Será utilizado um volume Docker para persistência dos dados do banco de dados, garantindo que os dados sejam mantidos mesmo que o container seja reiniciado.
 
  
 
 4 - Imagens adequadas:
-Serão utilizadas imagens Docker adequadas para um melhor desempenho e menor tamanho dos containers. Será dada preferência para imagens baseadas em Alpine, que são conhecidas por serem leves e enxutas, para reduzir o tamanho dos containers e diminuir o tempo de download e execução dos containers.
+Serão utilizadas imagens Docker adequadas para um melhor desempenho e menor tamanho dos containers. Será dada preferência para imagens baseadas em Python e mysql, que são conhecidas por serem leves e enxutas, para reduzir o tamanho dos containers e diminuir o tempo de download e execução dos containers.
 
  
 
