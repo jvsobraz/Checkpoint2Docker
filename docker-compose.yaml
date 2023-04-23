@@ -1,42 +1,42 @@
 version: "3"
 
-services: 
-    db: 
-        container_name: Checkpoint2DockerCompose 
-        image: mysql 
-        environment: 
-            MYSQL_USER: rm95749 
-            MYSQL_PASSWORD: 101202 
-            MYSQL_DATABASE: Checkpoint2DockerCompose 
-        command: --default-authentication-plugin=mysql_native_password 
-        ports: 
-            - "1521:1521" 
-        networks: 
-            - Checkpoint2DockerCompose_network 
-        volumes: 
-            - db_data:/var/lib/mysql 
+services:
+  db:
+    container_name: db
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 101202
+      MYSQL_DATABASE: checkpoint2dockercompose
+      MYSQL_USER: rm95749
+      MYSQL_PASSWORD: 101202
+    command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - checkpoint2dockercompose_network
 
-    app: 
-        container_name: Checkpoint2DockerCompose 
-        build: . 
-        ports: 
-            - "1522:1522" 
-        environment: 
-            DB_HOST: db 
-            DB_PORT: 1521 
-            DB_NAME: Checkpoint2DockerCompose 
-            DB_USER: rm95749 
-            DB_PASSWORD: 101202 
-            AUTH_PLUGIN: mysql_native_password 
-        
-        depends_on: 
-            - db 
-        networks: 
-            - Checkpoint2DockerCompose_network 
-        
-volumes: 
-    db_data:
-    
-networks: 
-    Checkpoint2DockerCompose_network: 
-        driver: bridge
+  app:
+    container_name: checkpoint2dockercompose
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_NAME: checkpoint2dockercompose
+      DB_USER: rm95749
+      DB_PASSWORD: 101202
+      AUTH_PLUGIN: mysql_native_password
+    depends_on:
+      - db
+    networks:
+      - checkpoint2dockercompose_network
+
+volumes:
+  db_data:
+
+networks:
+  checkpoint2dockercompose_network:
+    driver: bridge

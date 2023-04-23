@@ -1,10 +1,9 @@
-FROM python
+FROM python:3.8-slim-buster
 
-RUN apt-get -y update
-
-RUN apt-get -y install python
-
-RUN touch projeto-dimdim-dockercompose
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    gcc \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
@@ -14,4 +13,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-CMD ["python", "app.py"]
+RUN useradd -ms /bin/bash newuser
+RUN chown -R newuser:newuser /app
+
+USER newuser
+
+CMD bash -c "sleep 10000000000000000000000000000000000000000000000000000000 && python main.py"
